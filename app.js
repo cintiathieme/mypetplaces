@@ -15,7 +15,7 @@ mongoose
 app.set('view engine', 'hbs');
 app.set('views', __dirname + '/views')
 
-//routes
+
 
 
 app.listen(process.env.PORT, () => console.log(`App rodando na porta ${process.env.PORT}`));
