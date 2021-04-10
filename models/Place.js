@@ -11,6 +11,7 @@ const placeSchema = new Schema({
     cep: { type: String },
     categoria:  { type: String, required: true, enum: ['restaurantes', 'passeios', 'hoteis'] },
     descricao:  { type: String },
+    nota: { type: Number },
 }, 
 {
     timestamps: true,
