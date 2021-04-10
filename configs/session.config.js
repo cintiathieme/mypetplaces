@@ -11,7 +11,7 @@ module.exports = app => {
       cookie: {
         path: '/',
         // secure: true,
-        sameSite: false,
+        sameSite: true,
         httpOnly: true,
         maxAge: 60 * 60 * 24 
       },

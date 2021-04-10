@@ -14,6 +14,7 @@ router.get('/dashboard', (req, res) => {
 
 router.get('/editUser', (req, res) => {
     const userInfos = req.session.currentUser;
+    console.log(userInfos)
 
     User.findById(userInfos._id)
     .then(userInfos => {
