@@ -15,6 +15,11 @@ mongoose
 app.set('view engine', 'hbs');
 app.set('views', __dirname + '/views')
 
+const homeRoutes = require('./routes/home-routes');
+app.use('/', homeRoutes);
+
+const userRoutes = require('./routes/user-routes');
+app.use('/', userRoutes);
 
 
 
