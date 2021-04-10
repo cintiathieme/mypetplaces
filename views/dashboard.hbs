@@ -1,56 +1,17 @@
-<article class="panel is-danger">
-  <p class="panel-heading">
-    Meu dashboard
-  </p>
-  <p class="panel-tabs">
-    <a class="is-active">All</a>
-    <a>Public</a>
-    <a>Private</a>
-    <a>Sources</a>
-    <a>Forks</a>
-  </p>
-  <div class="panel-block">
-    <p class="control has-icons-left">
-      <input class="input is-danger" type="text" placeholder="Search">
-      <span class="icon is-left">
-        <i class="fas fa-search" aria-hidden="true"></i>
-      </span>
-    </p>
-  </div>
-  <a class="panel-block is-active" href="/editUser">
-    <span class="panel-icon">
-      <i class="fas fa-book" aria-hidden="true"></i>
-    </span>
-    Meu cadastro
-  </a>
-  <a class="panel-block" href="/myReviews">
-    <span class="panel-icon">
-      <i class="fas fa-book" aria-hidden="true"></i>
-    </span>
-    Meus reviews
-  </a>
-  <a class="panel-block">
-    <span class="panel-icon">
-      <i class="fas fa-book" aria-hidden="true"></i>
-    </span>
-    Indicar lugar
-  </a>
-  <a class="panel-block" href="/places/passeios">
-    <span class="panel-icon">
-      <i class="fas fa-book" aria-hidden="true"></i>
-    </span>
-    Procurar passeios
-  </a>
-  <a class="panel-block" href="/places/restaurantes">
-    <span class="panel-icon">
-      <i class="fas fa-book" aria-hidden="true"></i>
-    </span>
-    Procurar restaurantes
-  </a>
-  <a class="panel-block" href="/places/hoteis">
-    <span class="panel-icon">
-      <i class="fas fa-book" aria-hidden="true"></i>
-    </span>
-    Procurar hotéis
-  </a>
-</article>
+
+{{>navbar}}
+<div class="has-background-danger-light py-5">
+  <p class="title is-1 is-spaced has-text-centered has-text-danger has-background-danger-light">Meu dashboard</p>
+</div>
+<div class="is-flex is-flex-direction-column">
+  <button class="button is-danger is-outlined">Meu cadastro</button>
+  <button class="button is-danger is-outlined">Meus reviews</button>
+  <button class="button is-danger is-outlined">Indicar um lugar</button>
+</div>
+
+<div class="is-flex is-flex-direction-column">
+  <button class="button is-danger">Ver hotéis</button>
+  <button class="button is-danger">Ver passeios</button>
+  <button class="button is-danger">Ver </button>
+</div>
+{{>footer}}
