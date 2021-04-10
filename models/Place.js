@@ -1,16 +1,16 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model, Types } = require('mongoose');
 
 const placeSchema = new Schema({
     nome: { type: String, required: true, unique: true },
     telefone: { type: String, required: true, unique: true },
     site: { type: String },
-    endereço:  { type: String },
+    endereco:  { type: String },
     bairro:  { type: String },
     cidade:  { type: String },
     estado:  { type: String },
     cep: { type: String },
-    categoria:  { type: String, required: true, enum: ['Restaurante', 'Passeio', 'Hotel'] },
-    descrição:  { type: String },
+    categoria:  { type: String, required: true, enum: ['restaurantes', 'passeios', 'hoteis'] },
+    descricao:  { type: String },
 }, 
 {
     timestamps: true,
