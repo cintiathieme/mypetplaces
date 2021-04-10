@@ -1,75 +1,83 @@
-<div class="field">
-  <label class="label">Nome completo</label>
-  <div class="control">
-    <input class="input" type="text" placeholder="Text input">
-  </div>
-</div>
-
-<div class="field">
-  <label class="label">Senha</label>
-  <div class="control has-icons-left has-icons-right">
-    <input class="input is-success" type="text" placeholder="Text input" value="bulma">
-    <span class="icon is-small is-left">
-    </span>
-    <span class="icon is-small is-right">
-      <i class="fas fa-check"></i>
-    </span>
-  </div>
-  <p class="help is-success">Senha segura</p>
-</div>
-
-<div class="field">
-  <label class="label">Email</label>
-  <div class="control has-icons-left has-icons-right">
-    <input class="input is-danger" type="email" placeholder="Email input" value="hello@">
-    <span class="icon is-small is-left">
-      <i class="fas fa-envelope"></i>
-    </span>
-    <span class="icon is-small is-right">
-      <i class="fas fa-exclamation-triangle"></i>
-    </span>
-  </div>
-  <p class="help is-danger">This email is invalid</p>
-</div>
-
-<div class="field">
-  <label class="label">Estado</label>
-  <div class="control">
-    <div class="select">
-      <select>
-        <option>Selecione</option>
-        <option>With options</option>
-      </select>
+<form action="/register" method="post">
+  {{#if errorMessage}}
+    <span class="warning">{{errorMessage}}</span>
+  {{/if}}  
+  <div class="field">
+    <label class="label">Nome completo</label>
+    <div class="control">
+      <input class="input" type="text" name="newName" placeholder="Text input">
     </div>
   </div>
-</div>
 
-<div class="field">
-  <label class="label">Cidade</label>
-  <div class="control">
-    <div class="select">
-      <select>
-        <option>Selecione</option>
-        <option>With options</option>
-      </select>
+  <div class="field">
+    <label class="label">Senha</label>
+    <div class="control has-icons-left has-icons-right">
+      <input class="input is-success" type="text" name="newPassword" placeholder="Text input">
+      <span class="icon is-small is-left">
+      </span>
+      <span class="icon is-small is-right">
+        <i class="fas fa-check"></i>
+      </span>
+    </div>
+    <p class="help is-success">Senha segura</p>
+  </div>
+
+  <div class="field">
+    <label class="label">Email</label>
+    <div class="control has-icons-left has-icons-right">
+      <input class="input is-danger" type="email" name="newEmail" placeholder="Email input">
+      {{#if emailError}}
+        <span class="warning">{{emailError}}</span>
+      {{/if}} 
+      <span class="icon is-small is-left">
+        <i class="fas fa-envelope"></i>
+      </span>
+      <span class="icon is-small is-right">
+        <i class="fas fa-exclamation-triangle"></i>
+      </span>
+    </div>
+    <p class="help is-danger">This email is invalid</p>
+  </div>
+
+  {{!-- <div class="field">
+    <label class="label">Estado</label>
+    <div class="control">
+      <div class="select">
+        <select name="estado">
+          <option>Selecione</option>
+          <option>With options</option>
+        </select>
+      </div>
     </div>
   </div>
-</div>
 
-<div class="field">
-  <div class="control">
-    <label class="checkbox">
-      <input type="checkbox">
-      I agree to the <a href="#">terms and conditions</a>
-    </label>
+  <div class="field">
+    <label class="label">Cidade</label>
+    <div class="control">
+      <div class="select">
+        <select name="cidade">
+          <option>Selecione</option>
+          <option>With options</option>
+        </select>
+      </div>
+    </div>
   </div>
-</div>
 
-<div class="field is-grouped">
-  <div class="control">
-    <button class="button is-link">Cadastrar</button>
+  <div class="field">
+    <div class="control">
+      <label class="checkbox">
+        <input type="checkbox">
+        I agree to the <a href="#">terms and conditions</a>
+      </label>
+    </div>
+  </div> --}}
+
+  <div class="field is-grouped">
+    <div class="control">
+      <button type="submit" class="button is-link">Cadastrar</button>
+    </div>
+    <div class="control">
+      <button class="button is-link is-light"><a href="/cancel">Cancelar</a></button>
+    </div>
   </div>
-  <div class="control">
-    <button class="button is-link is-light">Cancelar</button>
-  </div>
-</div>
+</form>
