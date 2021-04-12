@@ -14,8 +14,7 @@ router.get('/dashboard', (req, res) => {
 
 router.get('/editUser', (req, res) => {
     const userInfos = req.session.currentUser;
-    console.log(userInfos)
-
+    
     User.findById(userInfos._id)
     .then(userInfos => {
         res.render('editUser', { userInfos });
@@ -43,8 +42,7 @@ router.post('/editUser', (req, res) => {
 
 router.post('/removeUser', (req,res) => {
     const id = req.session.currentUser;
-    console.log(id)
-
+   
     User.findByIdAndRemove(id)
     .then(() =>{
        res.redirect('/')
@@ -64,14 +62,80 @@ router.get('/places/:category', (req, res) => {
     })
 })
 
+router.post('/addReview/:id', async (req,res) => {
+    const placeId = req.params;
+    
+    const { review } = req.body;
+
+    try {
+        const newReview = {
+            lugar: placeId.id,
+            desc: review,
+            emissor: req.session.currentUser._id
+        }
+        await Review.create(newReview)
+            .then(() => {
+                res.render('dashboard')
+            })
+    } catch(error) {
+        console.log(error)
+    }    
+})
+
 router.get('/myReviews', (req, res) => {
-    Review.find({ usuário: req.session.currentUser }).populate('lugar')   
+    Review.find({ emissor: req.session.currentUser }).populate('lugar')   
         .then(myReviews => {
             res.render('myReviews', { myReviews })
         });
 })
 
 
+router.post('/myReviews/delete/:id', (req,res) => {
+    const { id } = req.params;
+    
+    Review.findByIdAndRemove(id)
+    .then(() =>{
+       res.redirect('/myReviews')
+    })
+    .catch(error => {
+        console.log('Erro ao deletar review', error)
+    })
+});
 
+// router.post('/myReviews/edit/:id', (req, res) => {
+    
+
+// });
+
+
+router.get('/addPlace', (req, res) => {
+    res.render('addPlace')
+}); 
+
+// router.post('/addPlace', async (req, res) => {
+//     const { newName, newAdress, newSite } = req.body;
+
+//     try {
+//         const placeFromDb = await Place.findOne({ nome: newName });
+        
+//         if (placeFromDb) {
+//             return res.render('addPlace', { placeError: 'Lugar já cadastrado' }); 
+//         }
+
+//         const newPlace = {
+//             nome: newName,
+//             endereco: newAdress,
+//             site: newSite,
+//         }
+       
+//         await Place.create(newPlace);
+        
+//         res.redirect('/dashboard');
+
+
+//     }catch (error) {
+//         console.log('Erro ao adicionar novo lugar', error)
+//     }
+// });
 
 module.exports = router;
