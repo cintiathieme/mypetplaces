@@ -52,14 +52,28 @@ router.post('/removeUser', (req,res) => {
     })
 });
 
-router.get('/places/:category', (req, res) => {
+router.get('/places/:category', async (req, res) => {
     const { category } = req.params;
     
-    const placesFromDb =  Place.find({ categoria: category })
+    const placesFromDb =  await Place.find({ categoria: category })
+    const reviewsFromDb = await Review.find()
 
-    .then(placesFromDb => {
-            res.render('places', { placesFromDb })
-    })
+    const placesWithReviewPromises = placesFromDb.map( async place => {
+        const parsePlace = place.toJSON();
+        const id = parsePlace._id
+        
+        const places = await Review.find({ lugar: id })
+        const reviews = {...parsePlace, reviews: places}
+        return reviews
+        
+    }); 
+
+    const placesWithReview = await Promise.all(placesWithReviewPromises)
+    
+    console.log(placesWithReview)
+    res.render('places', { placesWithReview })
+
+    // console.log(reviewsFromDb)
 })
 
 router.post('/addReview/:id', async (req,res) => {
