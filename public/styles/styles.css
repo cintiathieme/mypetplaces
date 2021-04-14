@@ -1,0 +1,13 @@
+html {
+    background-color: #FEECF0;
+    height: 100%;
+}
+
+.footer_custom {
+    bottom: 0;
+    position: absolute;
+}
+
+.footer_link {
+    color: #F14668;
+}
