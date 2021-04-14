@@ -1,21 +1,25 @@
 {{>navbar}}
-{{#each}}
+{{#each myReviews}}
 <div class="card">
   <header class="card-header">
     <p class="card-header-title">
-      Nome do Lugar
+      {{this.lugar.nome}} 
     </p>
   </header>
   <div class="card-content">
     <div class="content">
-      Descrição da review: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.
+      {{this.desc}}
       <br>
-      <time datetime="2016-1-1">data da review</time>
+      <time datetime="2016-1-1">{{this.updatedAt}}</time>
     </div>
   </div>
   <footer class="card-footer">
-    <a href="#" class="card-footer-item">Editar</a>
-    <a href="#" class="card-footer-item">Apagar</a>
+    <form action="/myReviews/edit/{{this.id}}" method="post">
+      <button class="card-footer-item">Editar</button>
+    </form>
+    <form action="/myReviews/delete/{{this.id}}" method="post">
+      <button class="card-footer-item">Apagar</button>
+    </form>
   </footer>
 </div>
 {{/each}}

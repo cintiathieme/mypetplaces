@@ -1,65 +1,67 @@
 {{>navbar}}
 
-<div class="field">
-  <label class="label">Nome do lugar</label>
-  <div class="control">
-    <input class="input" type="text" placeholder="Text input">
-  </div>
-</div>
-
-<div class="field">
-  <label class="label">Endereço</label>
-  <div class="control has-icons-left has-icons-right">
-    <input class="input is-success" type="text" placeholder="Text input" value="bulma">
-    <span class="icon is-small is-left">
-    </span>
-    <span class="icon is-small is-right">
-    </span>
-  </div>
-</div>
-
-<div class="field">
-  <label class="label">Site</label>
-  <div class="control has-icons-left has-icons-right">
-    <input class="input is-danger" type="email" placeholder="Email input" value="hello@">
-    <span class="icon is-small is-left">
-      <i class="fas fa-envelope"></i>
-    </span>
-    <span class="icon is-small is-right">
-      <i class="fas fa-exclamation-triangle"></i>
-    </span>
-  </div>
-</div>
-
-<div class="field">
-  <label class="label">Estado</label>
-  <div class="control">
-    <div class="select">
-      <select>
-        <option>Select dropdown</option>
-        <option>With options</option>
-      </select>
+<form action="/addPlace" method="post">
+  <div class="field">
+    <label class="label">Nome do lugar</label>
+    <div class="control">
+      <input class="input" type="text" name="newPlace" placeholder="Text input">
     </div>
   </div>
-</div>
-<div class="field">
-  <label class="label">Cidade</label>
-  <div class="control">
-    <div class="select">
-      <select>
-        <option>Select dropdown</option>
-        <option>With options</option>
-      </select>
+
+  <div class="field">
+    <label class="label">Endereço</label>
+    <div class="control has-icons-left has-icons-right">
+      <input class="input is-success" type="text" name="newAdress" placeholder="Text input">
+      <span class="icon is-small is-left">
+      </span>
+      <span class="icon is-small is-right">
+      </span>
     </div>
   </div>
-</div>
 
-<div class="field">
-  <label class="label">Comentários</label>
-  <div class="control">
-    <textarea class="textarea" placeholder="Textarea"></textarea>
+  <div class="field">
+    <label class="label">Site</label>
+    <div class="control has-icons-left has-icons-right">
+      <input class="input is-danger" type="email" name="newSite" placeholder="Email input" ">
+      <span class="icon is-small is-left">
+        <i class="fas fa-envelope"></i>
+      </span>
+      <span class="icon is-small is-right">
+        <i class="fas fa-exclamation-triangle"></i>
+      </span>
+    </div>
   </div>
-</div>
+
+  <div class="field">
+    <label class="label">Estado</label>
+    <div class="control">
+      <div class="select">
+        <select>
+          <option>Select dropdown</option>
+          <option>With options</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="field">
+    <label class="label">Cidade</label>
+    <div class="control">
+      <div class="select">
+        <select>
+          <option>Select dropdown</option>
+          <option>With options</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="label">Comentários</label>
+    <div class="control">
+      <textarea class="textarea" placeholder="Textarea"></textarea>
+    </div>
+  </div>
+</form>
 
 <div class="field">
   <div class="control">

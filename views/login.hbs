@@ -1,5 +1,9 @@
 {{>navbar}}
+
 <form action="/login" method="post">
+  {{#if errorLogin}}
+    <span class="warning">{{errorLogin}}</span>
+  {{/if}}  
   <div class="field">
     <p class="control has-icons-left has-icons-right">
       <input class="input" type="email" name="userEmail" placeholder="Email">

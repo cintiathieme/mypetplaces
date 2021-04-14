@@ -12,6 +12,13 @@ router.get('/register', (req, res) => {
 router.post('/register', async (req, res) => {
     const { newName, newPassword, newEmail } = req.body;
 
+    if(newName.trim().length === 0 || newPassword.trim().length === 0 || newEmail.trim().length === 0) {
+        return res.render('register', {emptyField: 'Todos os campos são obrigatórios'})
+    }
+
+    if(newPassword.trim().length < 6) {
+        return res.render('register', { passwordError: 'A senha deve conter pelo menos 6 caracteres'})
+    }
     try {
 
         const userFromDb = await User.findOne({ email: newEmail });
@@ -50,12 +57,8 @@ router.post('/login', async (req, res) => {
 
         const userFromDb = await User.findOne( { email: userEmail });
 
-        if (!userFromDb) {
-            return res.render('login', { emailNotFound: ['Email não encontrado'] });
-        }
-
-        if (userPassword !== userFromDb.senha) {
-            return res.render('login', { incorrectPassword: ['Senha incorreta']})
+        if (!userFromDb || userPassword !== userFromDb.senha) {
+            return res.render('login', { errorLogin: ['Email e/ou senha incorreto(s)'] });
         }
 
         req.session.currentUser = userFromDb;

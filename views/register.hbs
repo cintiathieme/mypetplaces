@@ -1,4 +1,7 @@
 <form action="/register" method="post">
+  {{#if emptyField}}
+    <span class="warning">{{emptyField}}</span>
+  {{/if}}  
   {{#if errorMessage}}
     <span class="warning">{{errorMessage}}</span>
   {{/if}}  
@@ -13,6 +16,9 @@
     <label class="label">Senha</label>
     <div class="control has-icons-left has-icons-right">
       <input class="input is-success" type="text" name="newPassword" placeholder="Text input">
+      {{#if passwordError}}
+        <span class="warning">{{passwordError}}</span>
+      {{/if}}
       <span class="icon is-small is-left">
       </span>
       <span class="icon is-small is-right">
@@ -76,8 +82,10 @@
     <div class="control">
       <button type="submit" class="button is-link">Cadastrar</button>
     </div>
+</form>
     <div class="control">
-      <a href="/cancel"><button class="button is-link is-light">Cancelar</button></a>
+      <form action="/cancel" method="get">
+        <button class="button is-link is-light">Cancelar</button>
+      </form>
     </div>
   </div>
-</form>

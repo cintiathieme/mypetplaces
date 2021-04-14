@@ -1,4 +1,16 @@
-{{#each placesFromDb}}
+{{#each placesWithReview}}
+
 {{this.nome}}
+
+{{#each this.reviews}}
+<p> {{this.desc}}</p>
+{{/each}}
+
+
+
+<form action="/addReview/{{this.id}}" method="post">
+    <input type="text" name="review">
+    <button type="submit">Adicionar avaliação</button>
+</form> 
 
 {{/each}}

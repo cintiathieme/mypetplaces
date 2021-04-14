@@ -8,14 +8,6 @@ const app = express(); // aqui estamos instanciando o pacote do express
 
 require('./configs/session.config')(app);
 
-// app.get("/", (req, res) => {
-//   res.render("home");
-// });
-
-// app.listen(3000, () =>
-//   console.log("MyPetPlaces running! :D")
-// );
-
 app.set("view engine", "hbs");
 app.set("views", __dirname + "/views");
 app.use(express.static(__dirname + "/public"));
@@ -33,8 +25,16 @@ mongoose
 const homeRoutes = require('./routes/home-routes');
 app.use('/', homeRoutes);
 
-const userRoutes = require('./routes/auth-routes');
-app.use('/', userRoutes);
+const authRoutes = require('./routes/auth-routes');
+app.use('/', authRoutes);
+
+// app.use((req, res, next) => {
+//     if(req.session.currentUser) {
+//         return next();
+//     }
+//     res.redirect('/login');
+  
+// })
 
 const loggedRoutes = require('./routes/logedd-routes');
 app.use('/', loggedRoutes);
