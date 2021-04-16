@@ -4,11 +4,15 @@ const Place = require('../models/Place');
 const User = require('../models/User');
 const Review = require('../models/Review');
 
+const fileUploader = require('../configs/cloudinary.config');
+
 const router = express();
 
 
 router.get('/dashboard', (req, res) => {
-    res.render('dashboard');
+    const currentUser = req.session.currentUser;
+
+    res.render('dashboard', { currentUser: req.session.currentUser });
 
 });
 
@@ -17,7 +21,7 @@ router.get('/editUser', (req, res) => {
     
     User.findById(userInfos._id)
         .then(userInfos => {
-            res.render('editUser', { userInfos });
+            res.render('editUser', { userInfos, currentUser: req.session.currentUser });
         })
         .catch(error => {
             return error;
@@ -67,7 +71,7 @@ router.get('/places/:category', async (req, res) => {
 
     const placesWithReview = await Promise.all(placesWithReviewPromises)
 
-    res.render('places', { placesWithReview })
+    res.render('places', { placesWithReview, currentUser: req.session.currentUser })
 });
 
 router.get('/addReview/:id', (req, res) => {
@@ -75,7 +79,7 @@ router.get('/addReview/:id', (req, res) => {
 
     Place.findById(id)
         .then(placeFromDb => {
-            res.render('placeDetail', { placeFromDb })
+            res.render('placeDetail', { placeFromDb, currentUser: req.session.currentUser })
         });
 });
 
@@ -102,7 +106,7 @@ router.post('/addReview/:id', (req,res) => {
 router.get('/myReviews', (req, res) => {
     Review.find({ emissor: req.session.currentUser }).populate('lugar')   
         .then(myReviews => {
-            res.render('myReviews', { myReviews })
+            res.render('myReviews', { myReviews, currentUser: req.session.currentUser })
         });
 })
 
@@ -134,33 +138,37 @@ router.post('/myReviews/edit/:id', (req, res) => {
 });   
 
 router.get('/addPlace', (req, res) => {
-    res.render('addPlace')
+    res.render('addPlace', { currentUser: req.session.currentUser })
 }); 
 
-// router.post('/addPlace', async (req, res) => {
-//     const { newName, newAdress, newSite } = req.body;
-
-//     try {
-//         const placeFromDb = await Place.findOne({ nome: newName });
+router.post('/addPlace', fileUploader.single('newImage'), async (req, res) => {
+    const { newPlace, newAdress, newSite, newCategory, newDescription } = req.body;
+           
+    try {
+        const placeFromDb = await Place.findOne({ nome: newPlace });
         
-//         if (placeFromDb) {
-//             return res.render('addPlace', { placeError: 'Lugar já cadastrado' }); 
-//         }
+        if (placeFromDb) {
+            return res.render('addPlace', { placeError: 'Lugar já cadastrado' }); 
+        }
 
-//         const newPlace = {
-//             nome: newName,
-//             endereco: newAdress,
-//             site: newSite,
-//         }
+        const addNewPlace = {
+            nome: newPlace.toUpperCase(),
+            endereco: newAdress,
+            site: newSite,
+            categoria: newCategory,
+            descricao: newDescription,
+            user: req.session.currentUser._id,
+            image: req.file.path
+        };
        
-//         await Place.create(newPlace);
+        await Place.create(addNewPlace);
         
-//         res.redirect('/dashboard');
+        res.redirect('/dashboard');
 
 
-//     }catch (error) {
-//         console.log('Erro ao adicionar novo lugar', error)
-//     }
-// });
+    }catch (error) {
+        console.log('Erro ao adicionar novo lugar', error)
+    }
+});
 
 module.exports = router;
