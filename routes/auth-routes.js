@@ -82,6 +82,9 @@ router.get('/logout', (req,res) => {
 
     res.redirect('/')
 })
+//     res.redirect('/')
+// })
+// precisamos mandar um id de usuario pra dentro do cookie pra conseguir validar os botoes de login/logout. aí conseguimos fazer isso com if/else na view.
 
 
 module.exports = router;

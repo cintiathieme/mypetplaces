@@ -1,16 +1,20 @@
 {{>navbar}}
+<div class="dashboard_container">
 <div class="has-background-danger-light py-5">
   <p class="title is-1 is-spaced has-text-centered has-text-danger has-background-danger-light">Meu dashboard</p>
 </div>
+ <div id="mapid"></div>
+ 
 <div class="is-flex is-flex-direction-column">
-  <a href="/editUser" class="button is-danger is-outlined">Meu cadastro</a>
-  <a href="/myreviews" class="button is-danger is-outlined">Meus reviews</a>
-  <a href="/addPlace" class="button is-danger is-outlined">Indicar um lugar</a>
+  <a href="/editUser" class="button is-danger is-outlined m-2">Meu cadastro</a>
+  <a href="/myreviews" class="button is-danger is-outlined m-2">Meus reviews</a>
+  <a href="/addPlace" class="button is-danger is-outlined m-2">Indicar um lugar</a>
 </div>
 
 <div class="is-flex is-flex-direction-column">
-  <a href="/places/hoteis" class="button is-danger">Ver hotéis</a>
-  <a href="/places/passeios"class="button is-danger">Ver passeios</a>
-  <a href="/places/restaurantes"class="button is-danger">Ver restaurantes </a>
+  <a href="/places/hoteis" class="button is-danger m-2">Ver hotéis</a>
+  <a href="/places/passeios" class="button is-danger m-2">Ver passeios</a>
+  <a href="/places/restaurantes" class="button is-danger m-2">Ver restaurantes </a>
+</div>
 </div>
 {{>footer}}
