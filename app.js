@@ -28,13 +28,13 @@ app.use('/', homeRoutes);
 const authRoutes = require('./routes/auth-routes');
 app.use('/', authRoutes);
 
-// app.use((req, res, next) => {
-//     if(req.session.currentUser) {
-//         return next();
-//     }
-//     res.redirect('/login');
+app.use((req, res, next) => {
+    if(req.session.currentUser) {
+        return next();
+    }
+    res.redirect('/login');
   
-// })
+})
 
 const loggedRoutes = require('./routes/logedd-routes');
 app.use('/', loggedRoutes);

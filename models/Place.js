@@ -2,7 +2,7 @@ const { Schema, model, Types } = require('mongoose');
 
 const placeSchema = new Schema({
     nome: { type: String, required: true, unique: true },
-    telefone: { type: String, required: true, unique: true },
+    telefone: { type: String },
     site: { type: String },
     endereco:  { type: String },
     bairro:  { type: String },
@@ -11,6 +11,8 @@ const placeSchema = new Schema({
     cep: { type: String },
     categoria:  { type: String, required: true, enum: ['restaurantes', 'passeios', 'hoteis'] },
     descricao:  { type: String },
+    user: { type: String },
+    image: { type: String },
 }, 
 {
     timestamps: true,

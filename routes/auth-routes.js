@@ -1,4 +1,5 @@
 const express = require('express');
+const bcrypt = require('bcryptjs')
 
 const Place = require('../models/Place');
 const User = require('../models/User');
@@ -27,10 +28,14 @@ router.post('/register', async (req, res) => {
             return res.render('register', { emailError: 'Email já cadastrado' }); 
         }
 
+        const saltRounds = 10;
+        const salt = bcrypt.genSaltSync(saltRounds);
+        const encryptedPassword = bcrypt.hashSync(newPassword, salt)
+
         const newUser = {
             nome: newName,
             email: newEmail,
-            senha: newPassword,
+            senha: encryptedPassword,
         }
        
         await User.create(newUser);
@@ -57,7 +62,9 @@ router.post('/login', async (req, res) => {
 
         const userFromDb = await User.findOne( { email: userEmail });
 
-        if (!userFromDb || userPassword !== userFromDb.senha) {
+        const comparedPassword = bcrypt.compareSync(userPassword, userFromDb.senha)
+
+        if (!userFromDb || !comparedPassword) {
             return res.render('login', { errorLogin: ['Email e/ou senha incorreto(s)'] });
         }
 
@@ -70,9 +77,11 @@ router.post('/login', async (req, res) => {
     }
 });
 
-// router.get('/logout', (req,res) => {
-//     req.session.destroy();
+router.get('/logout', (req,res) => {
+    req.session.destroy();
 
+    res.redirect('/')
+})
 //     res.redirect('/')
 // })
 // precisamos mandar um id de usuario pra dentro do cookie pra conseguir validar os botoes de login/logout. aí conseguimos fazer isso com if/else na view.

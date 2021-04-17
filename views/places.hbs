@@ -1,6 +1,11 @@
+
+{{>navbar}}
+
 {{#each placesWithReview}}
 
 <h1>{{this.nome}}</h1>
+
+<img src="{{this.image}}" alt="{{this.nome}}">
 
 {{#each this.reviews}}
 <p> {{this.desc}}</p>
