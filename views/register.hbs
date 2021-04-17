@@ -23,6 +23,15 @@
     </div>
     <p class="help is-danger">Sua senha precisa ter ao menos 6 caracteres.</p>
   </div>
+  <div class="field">
+    <label class="label">Confirme sua senha</label>
+    <div class="control has-icons-left has-icons-right">
+      <input class="input" type="password" name="confirmPassword" placeholder="Confirme sua senha">
+      {{#if confirmError}}
+      <span class="warning">{{confirmError}}</span>
+      {{/if}}
+    </div>    
+  </div>
 
   <div class="field">
     <label class="label">Email</label>

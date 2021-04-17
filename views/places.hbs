@@ -1,21 +1,27 @@
-
 {{>navbar}}
-
 {{#each placesWithReview}}
-
-<h1>{{this.nome}}</h1>
-
-<img src="{{this.image}}" alt="{{this.nome}}">
-
-{{#each this.reviews}}
-<p> {{this.desc}}</p>
+<div class="card">
+  <header class="card-header">
+    <p class="card-header-title">
+     {{this.nome}}
+    </p>
+  </header>
+  <img id="image" src="{{this.image}}" alt="{{this.nome}}">
+  <div class="card-content">
+    <div class="content">
+        <p class="card-header-title">
+     "{{this.descricao}}"
+    </p>
+      {{#each this.reviews}}
+        <p> {{this.desc}}</p>
+      <time datetime="2016-1-1">{{this.updatedAt}}</time>
+      <br>
+        {{/each}}
+    </div>
+  </div>
+  <footer class="card-footer">    
+      <a href="/addReview/{{this._id}}">Adicionar review</a>
+  </footer>
+</div>
 {{/each}}
-
-<a href="/addReview/{{this._id}}">Adicionar review</a>
-
-{{!-- <form action="/addReview/{{this.id}}" method="post">
-    <input type="text" name="review">
-    <button type="submit">Adicionar avaliação</button>
-</form>  --}}
-
-{{/each}}
+{{>footer}}

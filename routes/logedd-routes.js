@@ -32,6 +32,10 @@ router.post('/editUser', (req, res) => {
     const updatedUser = req.body;
 
     const id = req.session.currentUser;
+    
+    if(updatedUser.nome.trim().length === 0 || updatedUser.email.trim().length === 0) {
+        return res.redirect('/editUser')
+    }
 
     User.findByIdAndUpdate(id, updatedUser)
         .then(() => {
@@ -63,7 +67,7 @@ router.get('/places/:category', async (req, res) => {
         const parsedPlace = place.toJSON();
         const id = parsedPlace._id
         
-        const places = await Review.find({ lugar: id })
+        const places = await Review.find({ lugar: id }).populate('emissor')
         const reviews = {...parsedPlace, reviews: places}
         return reviews
         
@@ -141,8 +145,8 @@ router.get('/addPlace', (req, res) => {
     res.render('addPlace', { currentUser: req.session.currentUser })
 }); 
 
-router.post('/addPlace', fileUploader.single('newImage'), async (req, res) => {
-    const { newPlace, newAdress, newSite, newCategory, newDescription } = req.body;
+router.post('/addPlace', fileUploader.single('placeImage'), async (req, res) => {
+    const { newPlace, placeAdress, placeSite, placeCategory, placeDescription } = req.body;
            
     try {
         const placeFromDb = await Place.findOne({ nome: newPlace });
@@ -153,10 +157,10 @@ router.post('/addPlace', fileUploader.single('newImage'), async (req, res) => {
 
         const addNewPlace = {
             nome: newPlace.toUpperCase(),
-            endereco: newAdress,
-            site: newSite,
-            categoria: newCategory,
-            descricao: newDescription,
+            endereco: placeAdress,
+            site: placeSite,
+            categoria: placeCategory,
+            descricao: placeDescription,
             user: req.session.currentUser._id,
             image: req.file.path
         };
