@@ -5,9 +5,17 @@ html {
 
 .footer_custom {
     bottom: 0;
-    position: absolute;
+    position: relative;
 }
 
 .footer_link {
     color: #F14668;
+}
+
+.addplace_container, .dashboard_container {
+    padding: 20px;
+}
+
+#mapid { 
+    height: 180px; 
 }
