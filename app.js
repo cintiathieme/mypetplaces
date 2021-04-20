@@ -32,8 +32,7 @@ app.use((req, res, next) => {
     if(req.session.currentUser) {
         return next();
     }
-    res.redirect('/login');
-  
+    res.redirect('/login');  
 })
 
 const loggedRoutes = require('./routes/logedd-routes');
