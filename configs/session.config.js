@@ -13,7 +13,7 @@ module.exports = app => {
         // secure: true,
         sameSite: true,
         httpOnly: true,
-        maxAge: 60 * 60 * 24 
+        maxAge: 60 * 60 * 60 * 24
       },
     })
   );

@@ -1,4 +1,5 @@
 const express = require('express');
+const axios = require('axios');
 
 const Place = require('../models/Place');
 const User = require('../models/User');
@@ -146,7 +147,7 @@ router.get('/addPlace', (req, res) => {
 }); 
 
 router.post('/addPlace', fileUploader.single('placeImage'), async (req, res) => {
-    const { newPlace, placeAdress, placeSite, placeCategory, placeDescription } = req.body;
+    const { newPlace, placeAddress, placeSite, placeCategory, placeDescription } = req.body;
            
     try {
         const placeFromDb = await Place.findOne({ nome: newPlace });
@@ -155,11 +156,21 @@ router.post('/addPlace', fileUploader.single('placeImage'), async (req, res) => 
             return res.render('addPlace', { placeError: 'Lugar já cadastrado' }); 
         }
 
+        console.log('boa noite caiu na rota uhu')
+
+        const response = await axios.get(`${API_URL}?key=${API_KEY}&address=${encodeURI(placeAddress)}`)
+
+        console.log(response.data);
+
         const addNewPlace = {
             nome: newPlace.toUpperCase(),
-            endereco: placeAdress,
+            endereco: placeAddress,
             site: placeSite,
             categoria: placeCategory,
+            coordenadas: {
+                lat: response.data.results[0].geometry.location.lat,
+                lng: response.data.results[0].geometry.location.lng
+            },
             descricao: placeDescription,
             user: req.session.currentUser._id,
             image: req.file.path

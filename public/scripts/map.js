@@ -25,6 +25,14 @@ function startMap() {
   } else {
     // Browser says: Nah! I do not support this.
     console.log("Browser does not support geolocation.");
-  }  
+  }
 }
-startMap();
+
+// const parseJson = string => {
+//   try {
+//     return JSON.parse(string);
+//   }catch(e) {
+//     return null;
+//   }
+// }
+
