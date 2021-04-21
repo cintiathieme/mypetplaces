@@ -1,27 +1,36 @@
 {{>navbar}}
-{{#each placesWithReview}}
-<div class="card">
-  <header class="card-header">
-    <p class="card-header-title">
-     {{this.nome}}
-    </p>
-  </header>
-  <img id="image" src="{{this.image}}" alt="{{this.nome}}">
-  <div class="card-content">
-    <div class="content">
-        <p class="card-header-title">
-     "{{this.descricao}}"
-    </p>
-      {{#each this.reviews}}
-        <p> {{this.desc}}</p>
-      <time datetime="2016-1-1">{{this.updatedAt}}</time>
-      <br>
+
+  {{#each placesWithReview}}
+  <div class="card mb-3">
+    <div class="card-image is-fullwidth">
+      <figure class="image is-4by3">
+        <img src="{{this.image}}" alt="{{this.nome}}">
+      </figure>
+    </div>
+    <div class="card-content">
+      <div class="media">
+
+        <div class="media-content">
+          <p class="title is-4">{{this.nome}}</p>
+          <p class="subtitle is-6 has-text-danger">{{this.categoria}}</p>
+        </div>
+      </div>
+
+      <div class="content">
+        {{#each this.reviews}}
+        <div class="box">
+          <p><span class="has-text-weight-medium">Descrição:</span> {{this.desc}}</p>
+          <p><span class="has-text-weight-medium">Usuário:</span> {{this.user.nome}}</p>
+          <time datetime="2016-1-1"><span class="has-text-weight-medium">Data da review: </span>{{this.updatedAt}}</time>
+        <br>
+        </div>
         {{/each}}
+      </div>
+        <footer class="card-footer">    
+          <a class="button is-danger mt-3" href="/addReview/{{this._id}}">Adicionar review</a>
+        </footer>
     </div>
   </div>
-  <footer class="card-footer">    
-      <a href="/addReview/{{this._id}}">Adicionar review</a>
-  </footer>
-</div>
-{{/each}}
+  {{/each}}
+
 {{>footer}}

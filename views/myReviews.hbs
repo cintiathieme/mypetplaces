@@ -1,44 +1,48 @@
 {{>navbar}}
 {{#each myReviews}}
-<div class="card">
+<div class="my-3 card">
   <header class="card-header">
     <p class="card-header-title">
-      {{this.lugar.nome}} 
+      {{this.lugar.nome}}
     </p>
   </header>
   <div class="card-content">
     <div class="content">
+      <span class="has-text-weight-medium">Descrição: </span>
       {{this.desc}}
       <br>
-      <time datetime="2016-1-1">{{this.updatedAt}}</time>
+      <time datetime="2021-01-01T00:00">
+        <span class="has-text-weight-medium">
+          Data de criação:</span>
+        {{this.updatedAt}}</time>
     </div>
   </div>
-  <footer class="card-footer">
-    <button id="editButton" class="button">Editar</button>
+  <footer class="p-2 card-footer">
+    <button id="editButton" class="button is-danger">Editar</button>
     <form action="/myReviews/delete/{{this.id}}" method="post">
-      <button class="button">Apagar</button>
+      <button class="button ml-2 is-danger is-light">Apagar</button>
     </form>
   </footer>
 </div>
 
 <div class="modal">
   <form action="/myReviews/edit/{{this.id}}" method="post">
-  <div class="modal-background"></div>
-  <div class="modal-card">
-    <header class="modal-card-head">
-      <p class="modal-card-title">Editar</p>
-      <button class="delete" aria-label="close"></button>
-    </header>
-    <section class="modal-card-body">
-      <p>Editar review</p>
-     <input class="input is-success" type="text" name="updatedReview" placeholder="Text input" value="{{this.desc}}">
-    </section>
-    <footer class="modal-card-foot">
-      <button type="submit" class="button is-success">Save changes</button>
-      <button action="/myReviews" class="button">Cancel</button>
-      </form>
-    </footer>
-  </div>
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Editar</p>
+        <button class="delete" aria-label="close"></button>
+      </header>
+      <section class="modal-card-body">
+        <p>Editar review</p>
+        <input class="input is-danger" type="text" name="updatedReview" placeholder="Atualize sua review" value="{{this.desc}}">
+      </section>
+      <footer class="modal-card-foot">
+        <button type="submit" class="button is-danger">Salvar alterações</button>
+        <button action="/myReviews" class="button">Cancelar</button>
+  </form>
+  </footer>
+</div>
 </div>
 {{/each}}
 {{>footer}}

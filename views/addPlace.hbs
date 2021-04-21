@@ -87,10 +87,10 @@
 
     <div class="field is-grouped">
       <div class="control">
-        <button type="submit" class="button is-danger">Enviar</button>
+        <button type="submit" id="btn_addplace" class="button is-danger">Enviar</button>
       </div>
       <div class="control">
-        <button class="button is-danger is-light">Cancelar</button>
+        <a href="/dashboard" class="button is-danger is-light">Cancelar</a>
       </div>
     </div>
   </form>
@@ -100,6 +100,6 @@
 {{>footer}}
 
 <script src="https://unpkg.com/axios/dist/axios.min.js" type="text/javascript"></script>
-<script src="https://maps.googleapis.com/maps/api/geocode/js?key=AIzaSyBBd2m3QaZ0NpTejf3RJP45RxPews0tiIk"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBd2m3QaZ0NpTejf3RJP45RxPews0tiIk"></script>
+<script src="https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyBBd2m3QaZ0NpTejf3RJP45RxPews0tiIk"></script>
 <script src="scripts/map.js"></script>

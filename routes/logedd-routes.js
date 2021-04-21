@@ -156,9 +156,7 @@ router.post('/addPlace', fileUploader.single('placeImage'), async (req, res) => 
             return res.render('addPlace', { placeError: 'Lugar já cadastrado' }); 
         }
 
-        console.log('boa noite caiu na rota uhu')
-
-        const response = await axios.get(`${API_URL}?key=${API_KEY}&address=${encodeURI(placeAddress)}`)
+        const response = await axios.get(`${process.env.API_URL}?key=${process.env.API_KEY}&address=${encodeURI('Rua Dr. Albuquerque Lins, 992')}`)
 
         console.log(response.data);
 
@@ -176,13 +174,14 @@ router.post('/addPlace', fileUploader.single('placeImage'), async (req, res) => 
             image: req.file.path
         };
        
-        await Place.create(addNewPlace);
+        const newPlace = await Place.create(addNewPlace);
+        await newPlace.save();
         
         res.redirect('/dashboard');
 
 
     }catch (error) {
-        console.log('Erro ao adicionar novo lugar', error)
+        //console.log('Erro ao adicionar novo lugar', error)
     }
 });
 
