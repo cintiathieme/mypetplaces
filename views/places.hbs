@@ -1,10 +1,21 @@
 {{>navbar}}
 
+<form action="/places/{{placesWithReview.[0].categoria}}" method="post">
+<p>Filtre por cidade</p>
+<select dist name="city">
+  <option value=""></option>
   {{#each placesWithReview}}
-  <div class="card mb-3">
+  <option value="{{this.cidade}}">{{this.cidade}}</option>
+  {{/each}}
+</select>
+<button type="submit">Buscar</button>
+</form>
+
+{{#each placesWithReview}}
+    <div class="card mb-3">
     <div class="card-image is-fullwidth">
       <figure class="image is-4by3">
-        <img src="{{this.image}}" alt="{{this.nome}}">
+        <img src="{{this.imagem}}" alt="{{this.nome}}">
       </figure>
     </div>
     <div class="card-content">
@@ -17,15 +28,15 @@
         </div>
       </div>
 
+      {{#each this.reviews}}
       <div class="content">
-        {{#each this.reviews}}
         <div class="box">
           <p><span class="has-text-weight-medium">Descrição:</span> {{this.desc}}</p>
-          <p><span class="has-text-weight-medium">Usuário:</span> {{this.user.nome}}</p>
+          <p><span class="has-text-weight-medium">Usuário:</span> {{this.emissor.nome}}</p>
           <time datetime="2016-1-1"><span class="has-text-weight-medium">Data da review: </span>{{this.updatedAt}}</time>
         <br>
         </div>
-        {{/each}}
+    {{/each}}
       </div>
         <footer class="card-footer">    
           <a class="button is-danger mt-3" href="/addReview/{{this._id}}">Adicionar review</a>

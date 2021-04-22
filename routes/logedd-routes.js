@@ -79,6 +79,26 @@ router.get('/places/:category', async (req, res) => {
     res.render('places', { placesWithReview, currentUser: req.session.currentUser })
 });
 
+router.post('/places/:category', async (req, res) => {
+    const { city } = req.body;
+    
+    const placesFromDb =  await Place.find({ cidade: city })
+    
+    const placesWithReviewPromises = placesFromDb.map( async place => {
+        const parsedPlace = place.toJSON();
+        const id = parsedPlace._id
+        
+        const places = await Review.find({ lugar: id }).populate('emissor')
+        const reviews = {...parsedPlace, reviews: places}
+        return reviews
+        
+    }); 
+
+    const placesWithReview = await Promise.all(placesWithReviewPromises)
+
+    res.render('places', { placesWithReview, currentUser: req.session.currentUser })
+});
+
 router.get('/addReview/:id', (req, res) => {
     const { id } = req.params; 
 
@@ -111,6 +131,7 @@ router.post('/addReview/:id', (req,res) => {
 router.get('/myReviews', (req, res) => {
     Review.find({ emissor: req.session.currentUser }).populate('lugar')   
         .then(myReviews => {
+            console.log(myReviews)
             res.render('myReviews', { myReviews, currentUser: req.session.currentUser })
         });
 })
@@ -147,22 +168,27 @@ router.get('/addPlace', (req, res) => {
 }); 
 
 router.post('/addPlace', fileUploader.single('placeImage'), async (req, res) => {
-    const { newPlace, placeAddress, placeSite, placeCategory, placeDescription } = req.body;
+    const { newPlace, placeAddress, placeNumber, placeCity, placeState, placeSite, placeCategory, placeDescription } = req.body;
+
+    console.log(req.body)
            
     try {
-        const placeFromDb = await Place.findOne({ nome: newPlace });
+        const placeFromDb = await Place.findOne({ nome: newPlace.toUpperCase() });
         
         if (placeFromDb) {
-            return res.render('addPlace', { placeError: 'Lugar já cadastrado' }); 
+            return res.render('addPlace', { placeError: '*Lugar já cadastrado' }); 
         }
 
-        const response = await axios.get(`${process.env.API_URL}?key=${process.env.API_KEY}&address=${encodeURI('Rua Dr. Albuquerque Lins, 992')}`)
+        const response = await axios.get(`${process.env.API_URL}?key=${process.env.API_KEY}&address=${encodeURI(`${placeAddress},${placeNumber}`)}`);
 
         console.log(response.data);
 
         const addNewPlace = {
             nome: newPlace.toUpperCase(),
             endereco: placeAddress,
+            numero: placeNumber,
+            cidade: placeCity,
+            estado: placeState,
             site: placeSite,
             categoria: placeCategory,
             coordenadas: {
@@ -170,18 +196,18 @@ router.post('/addPlace', fileUploader.single('placeImage'), async (req, res) => 
                 lng: response.data.results[0].geometry.location.lng
             },
             descricao: placeDescription,
-            user: req.session.currentUser._id,
-            image: req.file.path
+            usuario: req.session.currentUser._id,
+            imagem: req.file.path
         };
        
-        const newPlace = await Place.create(addNewPlace);
-        await newPlace.save();
+        await Place.create(addNewPlace);
+       
         
         res.redirect('/dashboard');
 
 
     }catch (error) {
-        //console.log('Erro ao adicionar novo lugar', error)
+        console.log('Erro ao adicionar novo lugar', error)
     }
 });
 

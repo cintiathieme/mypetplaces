@@ -5,6 +5,7 @@ const placeSchema = new Schema({
     telefone: { type: String },
     site: { type: String },
     endereco:  { type: String },
+    numero: { type: Number },
     bairro:  { type: String },
     cidade:  { type: String },
     estado:  { type: String },
@@ -15,8 +16,8 @@ const placeSchema = new Schema({
     },
     categoria:  { type: String, required: true, enum: ['restaurantes', 'passeios', 'hoteis'] },
     descricao:  { type: String },
-    user: { type: String },
-    image: { type: String },
+    usuario: { type: String },
+    imagem: { type: String },
 }, 
 {
     timestamps: true,
