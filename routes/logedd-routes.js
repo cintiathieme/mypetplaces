@@ -147,7 +147,9 @@ router.get('/addPlace', (req, res) => {
 }); 
 
 router.post('/addPlace', fileUploader.single('placeImage'), async (req, res) => {
-    const { newPlace, placeAddress, placeSite, placeCategory, placeDescription } = req.body;
+    const { newPlace, placeAddress, placeNumber, placeCity, placeState, placeSite, placeCategory, placeDescription } = req.body;
+
+    console.log(req.body)
            
     try {
         const placeFromDb = await Place.findOne({ nome: newPlace });
@@ -163,6 +165,9 @@ router.post('/addPlace', fileUploader.single('placeImage'), async (req, res) => 
         const addNewPlace = {
             nome: newPlace.toUpperCase(),
             endereco: placeAddress,
+            numero: placeNumber,
+            cidade: placeCity,
+            estado: placeState,
             site: placeSite,
             categoria: placeCategory,
             coordenadas: {

@@ -22,16 +22,24 @@
     </div>
 
     <div class="field">
+      <label class="label">CEP</label>
+      <div class="control">
+        <input id="input_cep" class="input" type="text" name="placeZipCode" placeholder="Insira o CEP do lugar" onblur="pesquisacep(this.value)">
+      </div>
+    </div>
+
+    <div class="field">
       <label class="label">Endereço</label>
       <div class="control">
         <input id="input_address" class="input" type="text" name="placeAddress" placeholder="Endereço">
+        <input id="input_number" class="input" type="text" name="placeNumber" placeholder="Número">
       </div>
     </div>
 
     <div class="field">
       <div class="control">
         <label class="label">Cidade</label>
-        <input class="input" type="text" name="placeCity" placeholder="Cidade">
+        <input id="input_city" class="input" type="text" name="placeCity" placeholder="Cidade">
       </div>
     </div>
 
@@ -42,12 +50,6 @@
       </div>
     </div>
 
-    <div class="field">
-      <label class="label">CEP</label>
-      <div class="control">
-        <input id="input_cep" class="input" type="text" name="placeZipCode" placeholder="Insira o CEP do lugar">
-      </div>
-    </div>
 
     <div class="field">
       <label class="label">Categoria</label>
