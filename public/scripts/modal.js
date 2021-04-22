@@ -1,7 +1,10 @@
-let editButton = document.querySelector('#editButton');
+let editButton = document.querySelectorAll('#editButton');
 let modal = document.querySelector('.modal');
 
-editButton.addEventListener('click', () => {
-    modal.classList.add('is-active')
+editButton.forEach(edit => {
+    edit.addEventListener('click', () => {
+        modal.classList.add('is-active')
+    
+});
 })
 

@@ -2,10 +2,10 @@
 
 <div class="addplace_container">
 
-  <form action="/addPlace" method="post" enctype="multipart/form-data">
     {{#if placeError}}
     <span class="warning">{{placeError}}</span>
     {{/if}}
+  <form action="/addPlace" method="post" enctype="multipart/form-data">
 
     <div class="field">
       <label class="label">Nome do lugar</label>

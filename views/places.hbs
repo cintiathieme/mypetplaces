@@ -1,5 +1,16 @@
 {{>navbar}}
 
+<form action="/places/{{placesWithReview.[0].categoria}}" method="post">
+<p>Filtre por cidade</p>
+<select dist name="city">
+  {{#each placesWithReview}}
+  <option value=""></option>
+  <option value="{{this.cidade}}">{{this.cidade}}</option>
+  {{/each}}
+</select>
+<button type="submit">Buscar</button>
+</form>
+
 {{#each placesWithReview}}
     <div class="card mb-3">
     <div class="card-image is-fullwidth">
