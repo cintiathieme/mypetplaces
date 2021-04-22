@@ -18,19 +18,19 @@
     </div>
   </div>
   <footer class="p-2 card-footer">
-    <button id="editButton" class="button is-danger">Editar</button>
+    <button id={{this.id}} class="button is-danger editButton">Editar</button>
     <form action="/myReviews/delete/{{this.id}}" method="post">
       <button class="button ml-2 is-danger is-light">Apagar</button>
     </form>
   </footer>
 </div>
 
-<div class="modal">
+<div class="modal modal-{{this.id}}">
   <form action="/myReviews/edit/{{this.id}}" method="post">
     <div class="modal-background"></div>
     <div class="modal-card">
       <header class="modal-card-head">
-        <p class="modal-card-title">Editar</p>
+        <p class="modal-card-title" id={{this.id}}>Editar</p>
         <button class="delete" aria-label="close"></button>
       </header>
       <section class="modal-card-body">

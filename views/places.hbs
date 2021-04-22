@@ -3,8 +3,8 @@
 <form action="/places/{{placesWithReview.[0].categoria}}" method="post">
 <p>Filtre por cidade</p>
 <select dist name="city">
-  {{#each placesWithReview}}
   <option value=""></option>
+  {{#each placesWithReview}}
   <option value="{{this.cidade}}">{{this.cidade}}</option>
   {{/each}}
 </select>
@@ -15,7 +15,7 @@
     <div class="card mb-3">
     <div class="card-image is-fullwidth">
       <figure class="image is-4by3">
-        <img src="{{this.image}}" alt="{{this.nome}}">
+        <img src="{{this.imagem}}" alt="{{this.nome}}">
       </figure>
     </div>
     <div class="card-content">

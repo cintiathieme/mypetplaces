@@ -131,6 +131,7 @@ router.post('/addReview/:id', (req,res) => {
 router.get('/myReviews', (req, res) => {
     Review.find({ emissor: req.session.currentUser }).populate('lugar')   
         .then(myReviews => {
+            console.log(myReviews)
             res.render('myReviews', { myReviews, currentUser: req.session.currentUser })
         });
 })
