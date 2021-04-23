@@ -1,9 +1,10 @@
 {{>navbar}}
 
 <form class="box" action="/addReview/{{placeFromDb.id}}" method="post">
-<h3> {{placeFromDb.nome}}</h3>
-    <textarea class="textarea" placeholder="Insira sua review" name="review"></textarea>
-    <button class="button is-danger" type="submit">Adicionar avaliação</button>
+<h3 class="is-size-4"> </h3>
+  <p>Insira sua review sobre {{placeFromDb.nome}}. Quanto mais detalhada, melhor! :)</p>
+  <textarea class="textarea mt-3" placeholder="Insira sua review" name="review"></textarea>
+  <button class="button is-danger mt-3" type="submit">Adicionar avaliação</button>
 </form> 
 
 {{>footer}}

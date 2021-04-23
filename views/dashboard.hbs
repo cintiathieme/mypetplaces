@@ -1,10 +1,10 @@
 {{>navbar}}
-<div class="dashboard_container">
-<div class="has-background-danger-light py-5">
-  <p class="title is-1 is-spaced has-text-centered has-text-danger has-background-danger-light">Meu dashboard</p>
+<div class="box">
+  <p class="has-text-danger is-size-4">Meu dashboard</p>
 </div>
-<div id="map" data="{{placesFromDb.[0].coordenadas}}"></div>
-<div>
+<div class="dashboard_container">
+<div class="mb-3" id="map" data="{{placesFromDb.[0].coordenadas}}"></div>
+<div class="is-hidden">
 {{#each placesFromDb}}
 <div class="coords">
 <p>{{this.coordenadas.lat}}</p>

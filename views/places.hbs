@@ -1,5 +1,4 @@
 {{>navbar}}
-<div>
 {{#each placesWithReview}}
     <div class="card m-3">
     <div class="card-image is-fullwidth">
@@ -14,6 +13,9 @@
           <p class="title is-4">{{this.nome}}</p>
           <p class="subtitle is-6 has-text-danger">{{this.categoria}}</p>
           <p class="is-3">{{this.descricao}}</p>
+          <p class="is-3">{{this.horario}}</p>
+          <p class="is-3 mt-1"><span class="has-text-weight-medium">Endereço: </span>{{this.endereco}}</p>
+          <p class="has-text-weight-medium has-text-danger mt-2 is-size-4">Reviews:</p>
         </div>
       </div>
 
@@ -28,7 +30,7 @@
     {{/each}}
       </div>
         <footer class="card-footer">    
-          <a class="button is-danger my-3 ml-5" href="/addReview/{{this._id}}">Adicionar review</a>
+          <a class="button is-danger my-3 ml-1" href="/addReview/{{this._id}}">Adicionar review</a>
         </footer>
     </div>
   </div>

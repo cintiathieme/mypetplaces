@@ -8,6 +8,7 @@ const app = express(); // aqui estamos instanciando o pacote do express
 
 require('./configs/session.config')(app);
 
+app.use(require('morgan')('tiny'));
 app.set("view engine", "hbs");
 app.set("views", __dirname + "/views");
 app.use(express.static(__dirname + "/public"));
@@ -36,6 +37,7 @@ app.use((req, res, next) => {
 })
 
 const loggedRoutes = require('./routes/logedd-routes');
+const morgan = require('morgan');
 app.use('/', loggedRoutes);
 
 
