@@ -1,20 +1,19 @@
 {{>navbar}}
 {{#each placesWithReview}}
     <div class="card m-3">
-    <div class="card-image is-fullwidth">
+    <div class="card-image is-128x128">
       <figure class="image is-16by9">
         <img src="{{this.imagem}}" alt="{{this.nome}}">
       </figure>
     </div>
     <div class="card-content">
       <div class="media">
-
         <div class="media-content">
-          <p class="title is-4">{{this.nome}}</p>
+          <p class="title is-4" id="teste">{{this.nome}}</p>
           <p class="subtitle is-6 has-text-danger">{{this.categoria}}</p>
           <p class="is-3">{{this.descricao}}</p>
-          <p class="is-3">{{this.horario}}</p>
-          <p class="is-3 mt-1"><span class="has-text-weight-medium">Endereço: </span>{{this.endereco}}</p>
+          <p class="is-3"><span class="has-text-weight-medium">Horário de Funcionamento: </span>{{this.horario}}</p>
+          <p class="is-3 mt-1"><span class="has-text-weight-medium">Endereço: </span>{{this.endereco}}, {{this.numero}} - {{this.cidade}} / {{this.estado}}</p>
           <p class="has-text-weight-medium has-text-danger mt-2 is-size-4">Reviews:</p>
         </div>
       </div>
@@ -27,13 +26,13 @@
           <time datetime="2016-1-1"><span class="has-text-weight-medium">Data da review: </span>{{this.updatedAt}}</time>
         <br>
         </div>
-    {{/each}}
       </div>
+      {{/each}}
         <footer class="card-footer">    
           <a class="button is-danger my-3 ml-1" href="/addReview/{{this._id}}">Adicionar review</a>
         </footer>
     </div>
   </div>
-  {{/each}}
 </div>
+{{/each}}
 {{>footer}}

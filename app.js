@@ -6,6 +6,8 @@ const mongoose = require('mongoose');
 
 const app = express(); // aqui estamos instanciando o pacote do express
 
+const morgan = require('morgan');
+
 require('./configs/session.config')(app);
 
 app.use(require('morgan')('tiny'));
@@ -29,6 +31,7 @@ app.use('/', homeRoutes);
 const authRoutes = require('./routes/auth-routes');
 app.use('/', authRoutes);
 
+
 app.use((req, res, next) => {
     if(req.session.currentUser) {
         return next();
@@ -37,8 +40,20 @@ app.use((req, res, next) => {
 })
 
 const loggedRoutes = require('./routes/logedd-routes');
-const morgan = require('morgan');
 app.use('/', loggedRoutes);
 
+app.use((req,res) => {
+    res.status(404);
+    res.render('not-found', { layout: false })
+});
+
+app.use((err, req, res) => {
+    console.error('ERROR', req.method, req.path, err);
+
+    if (!res.headersSent) {
+        res.status(500);
+        res.render('error', { layout: false })
+    }
+});
 
 app.listen(process.env.PORT, () => console.log(`App rodando na porta ${process.env.PORT}`));

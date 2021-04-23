@@ -2,7 +2,6 @@ const { Schema, model, Types } = require('mongoose');
 
 const placeSchema = new Schema({
     nome: { type: String, required: true, unique: true },
-    telefone: { type: String },
     site: { type: String },
     endereco:  { type: String },
     numero: { type: Number },
@@ -18,6 +17,7 @@ const placeSchema = new Schema({
     descricao:  { type: String },
     usuario: { type: String },
     imagem: { type: String },
+    horario: { type: String }
 }, 
 {
     timestamps: true,
