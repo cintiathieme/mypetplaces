@@ -1,7 +1,7 @@
 {{>navbar}}
 {{#each placesWithReview}}
     <div class="card m-3">
-    <div class="card-image is-128x128">
+    <div class="card-image is-fullwidth">
       <figure class="image is-16by9">
         <img src="{{this.imagem}}" alt="{{this.nome}}">
       </figure>
@@ -9,7 +9,7 @@
     <div class="card-content">
       <div class="media">
         <div class="media-content">
-          <p class="title is-4" id="teste">{{this.nome}}</p>
+          <p class="title is-4">{{this.nome}}</p>
           <p class="subtitle is-6 has-text-danger">{{this.categoria}}</p>
           <p class="is-3">{{this.descricao}}</p>
           <p class="is-3"><span class="has-text-weight-medium">Horário de Funcionamento: </span>{{this.horario}}</p>
