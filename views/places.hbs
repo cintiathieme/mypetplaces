@@ -1,20 +1,9 @@
 {{>navbar}}
-
-<form action="/places/{{placesWithReview.[0].categoria}}" method="post">
-<p>Filtre por cidade</p>
-<select dist name="city">
-  <option value=""></option>
-  {{#each placesWithReview}}
-  <option value="{{this.cidade}}">{{this.cidade}}</option>
-  {{/each}}
-</select>
-<button type="submit">Buscar</button>
-</form>
-
+<div>
 {{#each placesWithReview}}
-    <div class="card mb-3">
+    <div class="card m-3">
     <div class="card-image is-fullwidth">
-      <figure class="image is-4by3">
+      <figure class="image is-16by9">
         <img src="{{this.imagem}}" alt="{{this.nome}}">
       </figure>
     </div>
@@ -39,10 +28,10 @@
     {{/each}}
       </div>
         <footer class="card-footer">    
-          <a class="button is-danger mt-3" href="/addReview/{{this._id}}">Adicionar review</a>
+          <a class="button is-danger my-3 ml-5" href="/addReview/{{this._id}}">Adicionar review</a>
         </footer>
     </div>
   </div>
   {{/each}}
-
+</div>
 {{>footer}}

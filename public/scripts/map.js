@@ -1,3 +1,18 @@
+const addMarker = () => {
+  const coords = document.querySelectorAll(".coords");
+  for (let i=0; i < coords.length; i++) {
+    new google.maps.Marker({
+      position: {
+        lat: +coords[i].children[0].innerText,
+        lng: +coords[i].children[1].innerText
+      },
+      map: map,
+      title: "I'm here",
+    });
+    console.log(+coords[i].children[0].innerText)
+  }
+}
+
 let map, center;
 function startMap() {
   if (navigator.geolocation) {
@@ -5,7 +20,7 @@ function startMap() {
       function (position) {
         center = {
           lat: position.coords.latitude,
-          lng: position.coords.longitude,
+          lng: position.coords.longitude, 
         };
         map = new google.maps.Map(document.getElementById("map"), {
           zoom: 15,
@@ -16,6 +31,7 @@ function startMap() {
           map: map,
           title: "I'm here",
         });
+        addMarker();
       },
       function () {
         // If something goes wrong
@@ -28,14 +44,6 @@ function startMap() {
   }
 }
 startMap();
-
-// const parseJson = string => {
-//   try {
-//     return JSON.parse(string);
-//   }catch(e) {
-//     return null;
-//   }
-// }
 
 function limpa_formulário_cep() {
   //Limpa valores do formulário de cep.
@@ -75,7 +83,6 @@ if (cep != "") {
 
       //Preenche os campos com "..." enquanto consulta webservice.
       document.getElementById('input_address').value="...";
-      
       document.getElementById('input_city').value="...";
       document.getElementById('input_state').value="...";
     

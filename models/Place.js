@@ -11,8 +11,8 @@ const placeSchema = new Schema({
     estado:  { type: String },
     cep: { type: String },
     coordenadas: {
-        lat: { type: Number }, 
-        lng: { type: Number }
+        lat: { type: String }, 
+        lng: { type: String }
     },
     categoria:  { type: String, required: true, enum: ['restaurantes', 'passeios', 'hoteis'] },
     descricao:  { type: String },

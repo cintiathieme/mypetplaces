@@ -3,7 +3,15 @@
 <div class="has-background-danger-light py-5">
   <p class="title is-1 is-spaced has-text-centered has-text-danger has-background-danger-light">Meu dashboard</p>
 </div>
-<div id="map"></div>
+<div id="map" data="{{placesFromDb.[0].coordenadas}}"></div>
+<div>
+{{#each placesFromDb}}
+<div class="coords">
+<p>{{this.coordenadas.lat}}</p>
+<p>{{this.coordenadas.lng}}</p>
+</div>
+{{/each}}
+</div>
  
 <div class="is-flex is-flex-direction-column">
   <a href="/editUser" class="button is-danger is-outlined m-2">Meu cadastro</a>

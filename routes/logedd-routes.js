@@ -10,11 +10,12 @@ const fileUploader = require('../configs/cloudinary.config');
 const router = express();
 
 
-router.get('/dashboard', (req, res) => {
+router.get('/dashboard', async (req, res) => {
     const currentUser = req.session.currentUser;
-
-    res.render('dashboard', { currentUser: req.session.currentUser });
-
+    const placesFromDb = await Place.find();
+        res.render('dashboard', { currentUser, placesFromDb });
+        const { coordenadas } = placesFromDb;
+        console.log({coordenadas})
 });
 
 router.get('/editUser', (req, res) => {
@@ -131,7 +132,6 @@ router.post('/addReview/:id', (req,res) => {
 router.get('/myReviews', (req, res) => {
     Review.find({ emissor: req.session.currentUser }).populate('lugar')   
         .then(myReviews => {
-            console.log(myReviews)
             res.render('myReviews', { myReviews, currentUser: req.session.currentUser })
         });
 })
@@ -169,8 +169,6 @@ router.get('/addPlace', (req, res) => {
 
 router.post('/addPlace', fileUploader.single('placeImage'), async (req, res) => {
     const { newPlace, placeAddress, placeNumber, placeCity, placeState, placeSite, placeCategory, placeDescription } = req.body;
-
-    console.log(req.body)
            
     try {
         const placeFromDb = await Place.findOne({ nome: newPlace.toUpperCase() });
@@ -180,8 +178,6 @@ router.post('/addPlace', fileUploader.single('placeImage'), async (req, res) => 
         }
 
         const response = await axios.get(`${process.env.API_URL}?key=${process.env.API_KEY}&address=${encodeURI(`${placeAddress},${placeNumber}`)}`);
-
-        console.log(response.data);
 
         const addNewPlace = {
             nome: newPlace.toUpperCase(),
