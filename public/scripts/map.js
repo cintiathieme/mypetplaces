@@ -1,15 +1,21 @@
 const addMarker = () => {
   const coords = document.querySelectorAll(".coords");
+  const infoWindow = new google.maps.InfoWindow();
   for (let i=0; i < coords.length; i++) {
-    new google.maps.Marker({
+    const marker = new google.maps.Marker({
       position: {
         lat: +coords[i].children[0].innerText,
         lng: +coords[i].children[1].innerText
       },
       map: map,
-      title: "I'm here",
+      title: coords[i].children[2].innerText,
+      optimized: false
     });
-    console.log(+coords[i].children[0].innerText)
+    marker.addListener("click", () => {
+      infoWindow.close();
+      infoWindow.setContent(marker.getTitle());
+      infoWindow.open(marker.getMap(), marker);
+    })
   }
 }
 

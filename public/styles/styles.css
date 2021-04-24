@@ -9,6 +9,7 @@ html {
 
 .footer_custom {
     bottom: 0;
+    margin-top: auto;
     position: relative;
 }
 
