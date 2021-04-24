@@ -65,6 +65,10 @@ router.post('/login', async (req, res) => {
     try {
         const { userEmail, userPassword } = req.body;
 
+        if(userEmail.trim().length === 0 || userPassword.trim().length === 0) {
+            return res.render('login', {emptyField: 'Por favor, digite seu email e senha'})
+        }
+    
         const userFromDb = await User.findOne( { email: userEmail });
 
         const comparedPassword = bcrypt.compareSync(userPassword, userFromDb.senha)

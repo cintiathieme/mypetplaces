@@ -1,6 +1,9 @@
 {{>navbar}}
 
 <form action="/login" method="post" class="box">
+{{#if emptyField}}
+    <span class="warning">{{emptyField}}</span>
+  {{/if}}  
   {{#if errorLogin}}
     <span class="warning">{{errorLogin}}</span>
   {{/if}}  
