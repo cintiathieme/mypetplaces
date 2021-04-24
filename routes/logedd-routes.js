@@ -1,5 +1,6 @@
 const express = require('express');
 const axios = require('axios');
+const morgan = require('morgan');
 
 const Place = require('../models/Place');
 const User = require('../models/User');
@@ -64,26 +65,6 @@ router.get('/places/:category', async (req, res) => {
     const { category } = req.params;
     
     const placesFromDb =  await Place.find({ categoria: category })
-    
-    const placesWithReviewPromises = placesFromDb.map( async place => {
-        const parsedPlace = place.toJSON();
-        const id = parsedPlace._id
-        
-        const places = await Review.find({ lugar: id }).populate('emissor')
-        const reviews = {...parsedPlace, reviews: places}
-        return reviews
-        
-    }); 
-
-    const placesWithReview = await Promise.all(placesWithReviewPromises)
-
-    res.render('places', { placesWithReview, currentUser: req.session.currentUser })
-});
-
-router.post('/places/:category', async (req, res) => {
-    const { city } = req.body;
-    
-    const placesFromDb =  await Place.find({ cidade: city })
     
     const placesWithReviewPromises = placesFromDb.map( async place => {
         const parsedPlace = place.toJSON();
@@ -168,7 +149,7 @@ router.get('/addPlace', (req, res) => {
 }); 
 
 router.post('/addPlace', fileUploader.single('placeImage'), async (req, res) => {
-    const { newPlace, placeAddress, placeNumber, placeCity, placeState, placeSite, placeCategory, placeDescription } = req.body;
+    const { newPlace, placeAddress, placeNumber, placeCity, placeState, placeSite, placeCategory, placeHours, placeDescription } = req.body;
            
     try {
         const placeFromDb = await Place.findOne({ nome: newPlace.toUpperCase() });
@@ -186,6 +167,7 @@ router.post('/addPlace', fileUploader.single('placeImage'), async (req, res) => 
             cidade: placeCity,
             estado: placeState,
             site: placeSite,
+            horario: placeHours,
             categoria: placeCategory,
             coordenadas: {
                 lat: response.data.results[0].geometry.location.lat,
